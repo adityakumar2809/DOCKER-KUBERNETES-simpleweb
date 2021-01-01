@@ -1,9 +1,13 @@
 FROM node:alpine
 
 WORKDIR /usr/app
-COPY ./ ./
 
+# COPY ONLY package.json TO ENSURE npm install RUNS ONLY IF 
+# THERE IS A CHANGE IN THE DEPENDENCIES
+COPY ./package.json ./
 RUN npm install
+
+COPY ./ ./
 
 CMD [ "npm", "start" ]
 
